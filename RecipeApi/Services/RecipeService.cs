@@ -15,37 +15,72 @@ namespace RecipeApi.Services
 
         public async Task<IEnumerable<Recipe>> GetAllRecipesAsync()
         {
-            throw new NotImplementedException();
+            return await _recipeRepository.GetAllAsync();
         }
 
         public async Task<Recipe?> GetRecipeByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _recipeRepository.GetByIdAsync(id);
         }
 
         public async Task<IEnumerable<Recipe>> SearchRecipesAsync(string q)
         {
-            throw new NotImplementedException();
+            return await _recipeRepository.SearchAsync(q);
         }
 
-        public async Task<Recipe> CreateRecipeAsync(CreateRecipeDto createRecipeDto)
+        public async Task<Recipe> CreateRecipeAsync(CreateRecipeDto dto)
         {
-            throw new NotImplementedException();
+            var recipe = new Recipe
+            {
+                Name = dto.Name,
+                Description = dto.Description,
+                PrepTimeMinutes = dto.PrepTimeMinutes,
+                CookTimeMinutes = dto.CookTimeMinutes,
+                Servings = dto.Servings,
+                Difficulty = dto.Difficulty,
+                Ingredients = dto.Ingredients.Select(i => new Ingredient
+                {
+                    Name = i.Name,
+                    Quantity = decimal.TryParse(i.Quantity.ToString(), out var q) ? q : 0, 
+                    Unit = i.Unit
+                }).ToList(),
+                Instructions = dto.Instructions
+            };
+
+            return await _recipeRepository.CreateAsync(recipe);
         }
 
-        public async Task<bool> UpdateRecipeAsync(int id, CreateRecipeDto updateRecipeDto)
+        public async Task<bool> UpdateRecipeAsync(int id, CreateRecipeDto dto)
         {
-            throw new NotImplementedException();
+            var recipeUpdate = new Recipe
+            {
+                Name = dto.Name,
+                Description = dto.Description,
+                PrepTimeMinutes = dto.PrepTimeMinutes,
+                CookTimeMinutes = dto.CookTimeMinutes,
+                Servings = dto.Servings,
+                Difficulty = dto.Difficulty,
+                Ingredients = dto.Ingredients.Select(i => new Ingredient
+                {
+                    Name = i.Name,
+                    Quantity = decimal.TryParse(i.Quantity.ToString(), out var q) ? q : 0,
+                    Unit = i.Unit
+                }).ToList(),
+                Instructions = dto.Instructions
+            };
+
+            var updatedRecipe = await _recipeRepository.UpdateAsync(id, recipeUpdate);
+            return updatedRecipe != null;
         }
 
         public async Task<bool> DeleteRecipeAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _recipeRepository.DeleteAsync(id);
         }
 
         public async Task<IEnumerable<Recipe>> GetRecipesByDifficultyAsync(string level)
         {
-            throw new NotImplementedException();
+            return await _recipeRepository.GetByDifficultyAsync(level);
         }
     }
 }
