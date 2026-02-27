@@ -25,7 +25,7 @@ namespace RecipeApi.Controllers
         }
 
         // GET | /api/recipes/{id} | Hämta specifikt recept
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<Recipe>> GetById(int id)
         {
             var recipe = await _recipeService.GetRecipeByIdAsync(id);

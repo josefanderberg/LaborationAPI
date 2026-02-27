@@ -10,7 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<IRecipeRepository, RecipeRepository>();
-builder.Services.AddScoped<IRecipeService, RecipeService>();
+builder.Services.AddSingleton<IRecipeService, RecipeService>();
 
 var app = builder.Build();
 

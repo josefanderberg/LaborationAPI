@@ -1,6 +1,4 @@
-
-
-using System.Collections.Generic;
+using RecipeApi.Models;
 
 namespace RecipeApi.Models.DTOs;
 

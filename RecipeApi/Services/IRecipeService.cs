@@ -5,12 +5,12 @@ namespace RecipeApi.Services
 {
     public interface IRecipeService
     {
-        Task<IEnumerable<Recipe>> GetAllRecipesAsync();
-        Task<Recipe?> GetRecipeByIdAsync(int id);
-        Task<IEnumerable<Recipe>> SearchRecipesAsync(string q);
-        Task<Recipe> CreateRecipeAsync(CreateRecipeDto createRecipeDto);
+        Task<IEnumerable<RecipeResponseDto>> GetAllRecipesAsync();
+        Task<RecipeResponseDto?> GetRecipeByIdAsync(int id);
+        Task<IEnumerable<RecipeResponseDto>> SearchRecipesAsync(string q);
+        Task<RecipeResponseDto> CreateRecipeAsync(CreateRecipeDto createRecipeDto);
         Task<bool> UpdateRecipeAsync(int id, CreateRecipeDto updateRecipeDto);
         Task<bool> DeleteRecipeAsync(int id);
-        Task<IEnumerable<Recipe>> GetRecipesByDifficultyAsync(string level);
+        Task<IEnumerable<RecipeResponseDto>> GetRecipesByDifficultyAsync(string level);
     }
 }
