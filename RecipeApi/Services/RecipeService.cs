@@ -33,7 +33,7 @@ namespace RecipeApi.Services
             var recipe = new Recipe
             {
                 Name = dto.Name,
-                Description = dto.Description,
+                Description = dto.Description ?? string.Empty,
                 PrepTimeMinutes = dto.PrepTimeMinutes,
                 CookTimeMinutes = dto.CookTimeMinutes,
                 Servings = dto.Servings,
@@ -41,7 +41,7 @@ namespace RecipeApi.Services
                 Ingredients = dto.Ingredients.Select(i => new Ingredient
                 {
                     Name = i.Name,
-                    Quantity = decimal.TryParse(i.Quantity.ToString(), out var q) ? q : 0, 
+                    Quantity = i.Quantity,
                     Unit = i.Unit
                 }).ToList(),
                 Instructions = dto.Instructions
@@ -55,7 +55,7 @@ namespace RecipeApi.Services
             var recipeUpdate = new Recipe
             {
                 Name = dto.Name,
-                Description = dto.Description,
+                Description = dto.Description ?? string.Empty,
                 PrepTimeMinutes = dto.PrepTimeMinutes,
                 CookTimeMinutes = dto.CookTimeMinutes,
                 Servings = dto.Servings,
@@ -63,7 +63,7 @@ namespace RecipeApi.Services
                 Ingredients = dto.Ingredients.Select(i => new Ingredient
                 {
                     Name = i.Name,
-                    Quantity = decimal.TryParse(i.Quantity.ToString(), out var q) ? q : 0,
+                    Quantity = i.Quantity,
                     Unit = i.Unit
                 }).ToList(),
                 Instructions = dto.Instructions

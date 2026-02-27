@@ -1,18 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
-namespace RecipeApi.Models.DTOs
-{
-    public class CreateIngredientDto
-    {
-        [Required]
-        public string Name { get; set; } = string.Empty;
+namespace RecipeApi.Models.DTOs;
 
-        [Range(0.01, 10000)]
-        public decimal? Quantity { get; set; }
+public class  CreateIngredientDto {
+    [Required(ErrorMessage = "Ingredient name is required.")]
+    [StringLength(100, MinimumLength = 1)]
+    public string Name { get; set; } = string.Empty;
 
-        public string DisplayQuantity { get; set; } = string.Empty;
+    [Range(0.001, 10000, ErrorMessage = "Quantity must be a positive number.")]
+    public decimal Quantity { get; set; }
 
-        [Required]
-        public string Unit { get; set; } = string.Empty;
-    }
+    [Required(ErrorMessage = "Unit is required.")]
+    [StringLength(20)]
+    public string Unit { get; set; } = string.Empty;
 }
