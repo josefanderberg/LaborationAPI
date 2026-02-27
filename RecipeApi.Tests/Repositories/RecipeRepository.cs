@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using RecipeApi.Models;
 using RecipeApi.Repositories;
 
-namespace RecipeApi.Tests;
+namespace RecipeApi.Tests.Repositories;
 
 public class RecipeRepositoryTests {
     private RecipeRepository CreateRepository() => new();
