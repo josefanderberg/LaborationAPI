@@ -36,6 +36,7 @@ För att köra enhetstesterna, navigera till rotmappen och kör:
 ```bash
 dotnet test
 ```
+För Postman - kolla i RecipeAPI.json
 
 ## Projektstruktur
 
