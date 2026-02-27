@@ -1,5 +1,4 @@
 using System;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 using RecipeApi.Models;
@@ -48,7 +47,7 @@ public class RecipeRepositoryTests {
 
         var result = await repo.GetAllAsync();
 
-        Assert.Equal( 2, result.Count );
+        Assert.Equal( 2, result.Count() );
     }
 
     [Fact]
