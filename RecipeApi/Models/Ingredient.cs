@@ -5,7 +5,7 @@ public class Ingredient
     public string Name { get; set; } = string.Empty;
     public decimal Quantity { get; set; }
 
-    //För visning av text t.ex "2 klyftor"
+    //För visning av text t.ex "2 klyftor" eller "1 msk"
     public string DisplayQuantity { get; set; } = string.Empty;
 
     public string Unit { get; set; } = string.Empty;
