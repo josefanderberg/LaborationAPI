@@ -1,0 +1,267 @@
+{
+  "info": {
+    "name": "Recipe API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5011/api/recipes"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Hämta alla recept",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ]
+      }
+    },
+    {
+      "name": "2. Skapa recept - Pannkakor (Easy)",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Pannkakor\",\n  \"description\": \"Klassiska svenska pannkakor\",\n  \"prepTimeMinutes\": 10,\n  \"cookTimeMinutes\": 20,\n  \"servings\": 4,\n  \"difficulty\": \"Easy\",\n  \"ingredients\": [\n    { \"name\": \"Mjöl\",  \"quantity\": 3,   \"unit\": \"dl\"  },\n    { \"name\": \"Mjölk\", \"quantity\": 6,   \"unit\": \"dl\"  },\n    { \"name\": \"Ägg\",   \"quantity\": 3,   \"unit\": \"st\"  },\n    { \"name\": \"Salt\",  \"quantity\": 0.5, \"unit\": \"tsk\" }\n  ],\n  \"instructions\": [\n    \"Vispa ihop mjöl, mjölk och ägg till en slät smet\",\n    \"Låt vila 30 minuter\",\n    \"Stek i smör i het stekpanna\"\n  ]\n}"
+        }
+      }
+    },
+    {
+      "name": "3. Skapa recept - Lasagna (Medium)",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Lasagna\",\n  \"description\": \"Klassisk italiensk lasagna med köttfärssås\",\n  \"prepTimeMinutes\": 30,\n  \"cookTimeMinutes\": 45,\n  \"servings\": 6,\n  \"difficulty\": \"Medium\",\n  \"ingredients\": [\n    { \"name\": \"Lasagneplattor\", \"quantity\": 12,  \"unit\": \"st\" },\n    { \"name\": \"Köttfärs\",       \"quantity\": 500, \"unit\": \"g\"  },\n    { \"name\": \"Tomatsås\",       \"quantity\": 400, \"unit\": \"ml\" },\n    { \"name\": \"Bechamelsås\",    \"quantity\": 500, \"unit\": \"ml\" },\n    { \"name\": \"Riven ost\",      \"quantity\": 200, \"unit\": \"g\"  }\n  ],\n  \"instructions\": [\n    \"Bryn köttfärsen i en stekpanna\",\n    \"Blanda med tomatsåsen och låt puttra 15 minuter\",\n    \"Varva lasagneplattor, köttfärssås och bechamelsås\",\n    \"Toppa med riven ost\",\n    \"Grädda i 200°C i 40-45 minuter\"\n  ]\n}"
+        }
+      }
+    },
+    {
+      "name": "4. Skapa recept - Boeuf Bourguignon (Hard)",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Boeuf Bourguignon\",\n  \"description\": \"Klassisk fransk köttgryta med rödvin\",\n  \"prepTimeMinutes\": 45,\n  \"cookTimeMinutes\": 180,\n  \"servings\": 6,\n  \"difficulty\": \"Hard\",\n  \"ingredients\": [\n    { \"name\": \"Nötkött\",      \"quantity\": 1000, \"unit\": \"g\"  },\n    { \"name\": \"Rödvin\",       \"quantity\": 750,  \"unit\": \"ml\" },\n    { \"name\": \"Bacon\",        \"quantity\": 200,  \"unit\": \"g\"  },\n    { \"name\": \"Champinjoner\", \"quantity\": 300,  \"unit\": \"g\"  },\n    { \"name\": \"Morötter\",     \"quantity\": 3,    \"unit\": \"st\" },\n    { \"name\": \"Lök\",          \"quantity\": 2,    \"unit\": \"st\" }\n  ],\n  \"instructions\": [\n    \"Marinera köttet i rödvin över natten\",\n    \"Bryn bacon och kött i omgångar\",\n    \"Tillsätt grönsaker och vin\",\n    \"Låt puttra på låg värme i 3 timmar\"\n  ]\n}"
+        }
+      }
+    },
+    {
+      "name": "5. Hämta recept med id 1",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/1",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ]
+      }
+    },
+    {
+      "name": "6. Hämta recept som inte finns (404)",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/999",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ]
+      }
+    },
+    {
+      "name": "7a. Sök - pannkakor",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/search?q=pannkakor",
+          "query": [
+            {
+              "key": "q",
+              "value": "pannkakor"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ]
+      }
+    },
+    {
+      "name": "7b. Sök - mjöl",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/search?q=mjöl",
+          "query": [
+            {
+              "key": "q",
+              "value": "mjöl"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ]
+      }
+    },
+    {
+      "name": "8a. Filtrera - Easy",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/difficulty/Easy",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ]
+      }
+    },
+    {
+      "name": "8b. Filtrera - Medium",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/difficulty/Medium",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ]
+      }
+    },
+    {
+      "name": "8c. Filtrera - Hard",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/difficulty/Hard",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ]
+      }
+    },
+    {
+      "name": "9. Uppdatera recept (id: 1)",
+      "request": {
+        "method": "PUT",
+        "url": "{{baseUrl}}/1",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Pannkakor (uppdaterade)\",\n  \"description\": \"Fluffiga pannkakor med vanilj\",\n  \"prepTimeMinutes\": 15,\n  \"cookTimeMinutes\": 25,\n  \"servings\": 4,\n  \"difficulty\": \"Easy\",\n  \"ingredients\": [\n    { \"name\": \"Mjöl\",         \"quantity\": 3, \"unit\": \"dl\"   },\n    { \"name\": \"Mjölk\",        \"quantity\": 6, \"unit\": \"dl\"   },\n    { \"name\": \"Ägg\",          \"quantity\": 3, \"unit\": \"st\"   },\n    { \"name\": \"Vaniljsocker\", \"quantity\": 1, \"unit\": \"påse\" }\n  ],\n  \"instructions\": [\n    \"Blanda alla ingredienser till en slät smet\",\n    \"Låt smeten vila i kylskåpet i 30 minuter\",\n    \"Stek tunna pannkakor i smör\"\n  ]\n}"
+        }
+      }
+    },
+    {
+      "name": "10. Uppdatera recept som inte finns (404)",
+      "request": {
+        "method": "PUT",
+        "url": "{{baseUrl}}/999",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Finns inte\",\n  \"description\": \"Test\",\n  \"prepTimeMinutes\": 10,\n  \"cookTimeMinutes\": 10,\n  \"servings\": 2,\n  \"difficulty\": \"Easy\",\n  \"ingredients\": [\n    { \"name\": \"Test\", \"quantity\": 1, \"unit\": \"st\" }\n  ],\n  \"instructions\": [\"Steg 1\"]\n}"
+        }
+      }
+    },
+    {
+      "name": "11. Validieringsfel - namn för kort (400)",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"AB\",\n  \"prepTimeMinutes\": 10,\n  \"cookTimeMinutes\": 10,\n  \"servings\": 2,\n  \"difficulty\": \"Easy\",\n  \"ingredients\": [],\n  \"instructions\": []\n}"
+        }
+      }
+    },
+    {
+      "name": "12. Validieringsfel - ogiltig svårighetsgrad (400)",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Giltigt namn\",\n  \"prepTimeMinutes\": 10,\n  \"cookTimeMinutes\": 10,\n  \"servings\": 2,\n  \"difficulty\": \"SuperHard\",\n  \"ingredients\": [\n    { \"name\": \"Test\", \"quantity\": 1, \"unit\": \"st\" }\n  ],\n  \"instructions\": [\"Steg 1\"]\n}"
+        }
+      }
+    },
+    {
+      "name": "13. Ta bort recept (id: 1) - 204",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/1"
+      }
+    },
+    {
+      "name": "14. Ta bort recept som inte finns (404)",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/999"
+      }
+    }
+  ]
+}

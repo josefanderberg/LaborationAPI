@@ -1,0 +1,266 @@
+### ============================================================
+### Recipe API - HTTP Testfil
+### Använd med REST Client i VS Code (tillägget "REST Client")
+### ============================================================
+
+@baseUrl = https://localhost:7000/api/recipes
+
+### ============================================================
+### 1. HÄMTA ALLA RECEPT
+### ============================================================
+
+GET {{baseUrl}}
+Accept: application/json
+
+###
+
+### ============================================================
+### 2. SKAPA RECEPT - Pannkakor (Easy)
+### ============================================================
+
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "name": "Pannkakor",
+  "description": "Klassiska svenska pannkakor",
+  "prepTimeMinutes": 10,
+  "cookTimeMinutes": 20,
+  "servings": 4,
+  "difficulty": "Easy",
+  "ingredients": [
+    { "name": "Mjöl",  "quantity": 3,   "unit": "dl"  },
+    { "name": "Mjölk", "quantity": 6,   "unit": "dl"  },
+    { "name": "Ägg",   "quantity": 3,   "unit": "st"  },
+    { "name": "Salt",  "quantity": 0.5, "unit": "tsk" }
+  ],
+  "instructions": [
+    "Vispa ihop mjöl, mjölk och ägg till en slät smet",
+    "Låt vila 30 minuter",
+    "Stek i smör i het stekpanna"
+  ]
+}
+
+###
+
+### ============================================================
+### 3. SKAPA RECEPT - Lasagna (Medium)
+### ============================================================
+
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "name": "Lasagna",
+  "description": "Klassisk italiensk lasagna med köttfärssås",
+  "prepTimeMinutes": 30,
+  "cookTimeMinutes": 45,
+  "servings": 6,
+  "difficulty": "Medium",
+  "ingredients": [
+    { "name": "Lasagneplattor", "quantity": 12,  "unit": "st" },
+    { "name": "Köttfärs",       "quantity": 500, "unit": "g"  },
+    { "name": "Tomatsås",       "quantity": 400, "unit": "ml" },
+    { "name": "Bechamelsås",    "quantity": 500, "unit": "ml" },
+    { "name": "Riven ost",      "quantity": 200, "unit": "g"  }
+  ],
+  "instructions": [
+    "Bryn köttfärsen i en stekpanna",
+    "Blanda med tomatsåsen och låt puttra 15 minuter",
+    "Varva lasagneplattor, köttfärssås och bechamelsås",
+    "Toppa med riven ost",
+    "Grädda i 200°C i 40-45 minuter"
+  ]
+}
+
+###
+
+### ============================================================
+### 4. SKAPA RECEPT - Boeuf Bourguignon (Hard)
+### ============================================================
+
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "name": "Boeuf Bourguignon",
+  "description": "Klassisk fransk köttgryta med rödvin",
+  "prepTimeMinutes": 45,
+  "cookTimeMinutes": 180,
+  "servings": 6,
+  "difficulty": "Hard",
+  "ingredients": [
+    { "name": "Nötkött",     "quantity": 1000, "unit": "g"  },
+    { "name": "Rödvin",      "quantity": 750,  "unit": "ml" },
+    { "name": "Bacon",       "quantity": 200,  "unit": "g"  },
+    { "name": "Champinjoner","quantity": 300,  "unit": "g"  },
+    { "name": "Morötter",    "quantity": 3,    "unit": "st" },
+    { "name": "Lök",         "quantity": 2,    "unit": "st" }
+  ],
+  "instructions": [
+    "Marinera köttet i rödvin över natten",
+    "Bryn bacon och kött i omgångar",
+    "Tillsätt grönsaker och vin",
+    "Låt puttra på låg värme i 3 timmar"
+  ]
+}
+
+###
+
+### ============================================================
+### 5. HÄMTA SPECIFIKT RECEPT (id: 1)
+### ============================================================
+
+GET {{baseUrl}}/1
+Accept: application/json
+
+###
+
+### ============================================================
+### 6. HÄMTA RECEPT SOM INTE FINNS - förvänta 404
+### ============================================================
+
+GET {{baseUrl}}/999
+Accept: application/json
+
+###
+
+### ============================================================
+### 7. SÖK RECEPT
+### ============================================================
+
+GET {{baseUrl}}/search?q=pannkakor
+Accept: application/json
+
+###
+
+GET {{baseUrl}}/search?q=mjöl
+Accept: application/json
+
+###
+
+### ============================================================
+### 8. FILTRERA PÅ SVÅRIGHETSGRAD
+### ============================================================
+
+GET {{baseUrl}}/difficulty/Easy
+Accept: application/json
+
+###
+
+GET {{baseUrl}}/difficulty/Medium
+Accept: application/json
+
+###
+
+GET {{baseUrl}}/difficulty/Hard
+Accept: application/json
+
+###
+
+### ============================================================
+### 9. UPPDATERA RECEPT (id: 1)
+### ============================================================
+
+PUT {{baseUrl}}/1
+Content-Type: application/json
+
+{
+  "name": "Pannkakor (uppdaterade)",
+  "description": "Fluffiga pannkakor med vanilj",
+  "prepTimeMinutes": 15,
+  "cookTimeMinutes": 25,
+  "servings": 4,
+  "difficulty": "Easy",
+  "ingredients": [
+    { "name": "Mjöl",         "quantity": 3, "unit": "dl"   },
+    { "name": "Mjölk",        "quantity": 6, "unit": "dl"   },
+    { "name": "Ägg",          "quantity": 3, "unit": "st"   },
+    { "name": "Vaniljsocker", "quantity": 1, "unit": "påse" }
+  ],
+  "instructions": [
+    "Blanda alla ingredienser till en slät smet",
+    "Låt smeten vila i kylskåpet i 30 minuter",
+    "Stek tunna pannkakor i smör"
+  ]
+}
+
+###
+
+### ============================================================
+### 10. UPPDATERA RECEPT SOM INTE FINNS - förvänta 404
+### ============================================================
+
+PUT {{baseUrl}}/999
+Content-Type: application/json
+
+{
+  "name": "Finns inte",
+  "description": "Test",
+  "prepTimeMinutes": 10,
+  "cookTimeMinutes": 10,
+  "servings": 2,
+  "difficulty": "Easy",
+  "ingredients": [
+    { "name": "Test", "quantity": 1, "unit": "st" }
+  ],
+  "instructions": ["Steg 1"]
+}
+
+###
+
+### ============================================================
+### 11. VALIDIERINGSFEL - namn för kort, förvänta 400
+### ============================================================
+
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "name": "AB",
+  "prepTimeMinutes": 10,
+  "cookTimeMinutes": 10,
+  "servings": 2,
+  "difficulty": "Easy",
+  "ingredients": [],
+  "instructions": []
+}
+
+###
+
+### ============================================================
+### 12. VALIDIERINGSFEL - ogiltig svårighetsgrad, förvänta 400
+### ============================================================
+
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "name": "Giltigt namn",
+  "prepTimeMinutes": 10,
+  "cookTimeMinutes": 10,
+  "servings": 2,
+  "difficulty": "SuperHard",
+  "ingredients": [
+    { "name": "Test", "quantity": 1, "unit": "st" }
+  ],
+  "instructions": ["Steg 1"]
+}
+
+###
+
+### ============================================================
+### 13. TA BORT RECEPT (id: 1) - förvänta 204 No Content
+### ============================================================
+
+DELETE {{baseUrl}}/1
+
+###
+
+### ============================================================
+### 14. TA BORT RECEPT SOM INTE FINNS - förvänta 404
+### ============================================================
+
+DELETE {{baseUrl}}/999
+
+###
