@@ -1,17 +1,16 @@
-
-
-using RecipeApi.Models;
-using RecipeApi.Repositories;
 using System;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 
+using RecipeApi.Models;
+using RecipeApi.Repositories;
+
 namespace RecipeApi.Tests;
 
 public class RecipeRepositoryTests {
-    private RecipeRepositoryTests CreateRepository() => new();
+    private RecipeRepository CreateRepository() => new();
 
-    private RecipeRepositoryTests CreateSampleRecipe( string name = "Test Recipe" ) => new();
+    private Recipe CreateSampleRecipe( string name = "Test Recipe" ) => new() { Name = name };
 
     [Fact]
     public async Task GetAllAsync_EmptyRepo_ReturnsEmptyList() {
@@ -38,7 +37,7 @@ public class RecipeRepositoryTests {
         var created = await repo.CreateAsync( CreateSampleRecipe() );
         var after = DateTime.UtcNow;
 
-        Assert.InRange(created.CreatedAt, before, after);
+        Assert.InRange( created.CreatedAt, before, after );
     }
 
     [Fact]
@@ -55,7 +54,7 @@ public class RecipeRepositoryTests {
     [Fact]
     public async Task GetByIdAsync_ExistingId_ReturnsRecipe() {
         var repo = CreateRepository();
-        var created = await repo.CreateAsync( CreateSampleRecipe("Soup") );
+        var created = await repo.CreateAsync( CreateSampleRecipe( "Soup" ) );
 
         var found = await repo.GetByIdAsync( created.Id );
 
@@ -77,7 +76,7 @@ public class RecipeRepositoryTests {
         await repo.CreateAsync( CreateSampleRecipe( "Soup" ) );
         await repo.CreateAsync( CreateSampleRecipe( "Stew" ) );
 
-        var results = await repo.SearchAsync_MatchingName_ReturnsRecipe( "oup" );
+        var results = await repo.SearchAsync( "oup" );
 
         Assert.Single( results );
         Assert.Equal( "Soup", results.First().Name );
@@ -127,7 +126,7 @@ public class RecipeRepositoryTests {
     public async Task UpdateAsync_NonExistingId_ReturnsNull() {
         var repo = CreateRepository();
 
-        var result = await repo.UpdateAsync_ExistingRecipe_UpdatesFields( 999, CreateSampleRecipe() );
+        var result = await repo.UpdateAsync( 999, CreateSampleRecipe() );
 
         Assert.Null( result );
     }
