@@ -1,0 +1,42 @@
+@RecipeApi_HostAddress = http://localhost:5011
+
+### Hämta alla recept
+GET {{RecipeApi_HostAddress}}/api/recipes
+Accept: application/json
+
+### Skapa ett nytt recept (Pannkakor)
+POST {{RecipeApi_HostAddress}}/api/recipes
+Content-Type: application/json
+
+{
+  "name": "Pannkakor",
+  "description": "Klassiska svenska pannkakor",
+  "prepTimeMinutes": 10,
+  "cookTimeMinutes": 20,
+  "servings": 4,
+  "difficulty": "Easy",
+  "ingredients": [
+    { "name": "Mjöl", "quantity": 3, "unit": "dl" },
+    { "name": "Mjölk", "quantity": 6, "unit": "dl" },
+    { "name": "Ägg", "quantity": 3, "unit": "st" },
+    { "name": "Salt", "quantity": 0.5, "unit": "tsk" }
+  ],
+  "instructions": [
+    "Vispa ihop mjöl, mjölk och ägg till en slät smet",
+    "Låt vila 30 minuter",
+    "Stek i smör i het stekpanna"
+  ]
+}
+
+### Hämta ett specifikt recept (ID 1)
+# Obs: Fungerar bara om ID 1 faktiskt har skapats
+GET {{RecipeApi_HostAddress}}/api/recipes/1
+Accept: application/json
+
+### Sök efter recept
+GET {{RecipeApi_HostAddress}}/api/recipes/search?q=pannkakor
+Accept: application/json
+
+### Ta bort ett recept (ID 1)
+# Obs: Fungerar bara om ID 1 faktiskt har skapats
+DELETE {{RecipeApi_HostAddress}}/api/recipes/2
